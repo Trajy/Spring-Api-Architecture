@@ -25,7 +25,7 @@ public interface SaveController<RESOURCE> {
     default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembler().toEntity(resource);
+        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
         setAuditData(entity);
         getConfig().getService().save(entity);
         afterSave(resource, request);

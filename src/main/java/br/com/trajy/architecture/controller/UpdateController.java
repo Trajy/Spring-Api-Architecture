@@ -27,7 +27,7 @@ public interface UpdateController<RESOURCE> {
     default ResponseEntity<Void> update(@PathVariable String id, @RequestBody RESOURCE resource, HttpRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembler().toEntity(resource);
+        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
         setAuditData(entity);
         // TODO - implementar update
         getConfig().getService();

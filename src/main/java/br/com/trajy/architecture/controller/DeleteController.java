@@ -23,11 +23,11 @@ public interface DeleteController<RESOURCE> {
 
     @DeleteMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
     @Transactional(propagation = SUPPORTS, rollbackFor = Exception.class)
-    default <ID_TYPE> ResponseEntity<Void> update(@PathVariable String id, RESOURCE resource, HttpRequest request) {
+    default <ID_TYPE> ResponseEntity<Void> delete(@PathVariable String id, RESOURCE resource, HttpRequest request) {
         log.info("DELETE | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeDelete(resource, request);
         // TODO - implementar findById na service
-        AuditableEntity<Object> entity = getConfig().getAssembler().toEntity(resource);
+        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
         setAuditData(entity);
         // TODO - implementar update
         getConfig().getService().update(entity);
