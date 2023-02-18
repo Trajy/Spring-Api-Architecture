@@ -23,14 +23,13 @@ public interface UpdateController<RESOURCE> {
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
-    @Transactional(propagation = SUPPORTS, rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     default ResponseEntity<Void> update(@PathVariable String id, @RequestBody RESOURCE resource, HttpRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
         AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
         setAuditData(entity);
-        // TODO - implementar update
-        getConfig().getService();
+        getConfig().getService().update(entity);
         afterUpdate(resource, request);
         log.info("PUT | Finalizado | Controller: {}", this.getClass().getSimpleName());
         return noContent().build();
