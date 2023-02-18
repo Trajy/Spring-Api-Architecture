@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.model.resource;
+package br.com.trajy.architecture.resource;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
