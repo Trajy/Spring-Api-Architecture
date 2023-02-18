@@ -23,7 +23,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
+        AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly().toEntity(resource);
         setCreateAuditData(entity);
         getConfig().getService().save(entity);
         afterSave(resource, request);
