@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -21,7 +20,6 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    @Transactional(rollbackFor = Exception.class)
     default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);

@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 
 public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
@@ -19,7 +18,6 @@ public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    @Transactional(rollbackFor = Exception.class)
     default ResponseEntity<RESOURCE> find(ID_TYPE id, HttpRequest request) {
         log.info("GET | Iniciado | Controller: {}", this.getClass().getSimpleName());
         beforeFind(request);
