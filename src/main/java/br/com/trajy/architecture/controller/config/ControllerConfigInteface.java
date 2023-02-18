@@ -9,7 +9,6 @@ public interface ControllerConfigInteface {
     <ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>,
             SERVICE extends ServiceAbstract<ID_TYPE, ENTITY>> SERVICE getService();
 
-    <ID_TYPE, RESOURCE, ENTITY extends AuditableEntity<ID_TYPE>,
-            ASSEMBLY extends AssemblyMapperInterface<RESOURCE, ENTITY>> ASSEMBLY getAssembly();
+    <RESOURCE, ENTITY, ASSEMBLY extends AssemblyMapperInterface<RESOURCE, ENTITY>> ASSEMBLY getAssembly();
 
 }
