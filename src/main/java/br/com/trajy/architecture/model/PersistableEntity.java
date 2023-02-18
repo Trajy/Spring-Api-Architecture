@@ -1,4 +1,4 @@
-package br.com.trajy.market.architecture.model.resource;
+package br.com.trajy.architecture.model;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -11,7 +11,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class IdResource<T> {
+public abstract class PersistableEntity<T> {
 
     @Id
     @GeneratedValue(strategy = IDENTITY)

@@ -1,7 +1,7 @@
-package br.com.trajy.market.architecture.service;
+package br.com.trajy.architecture.service;
 
-import br.com.trajy.market.architecture.model.AuditableEntity;
-import br.com.trajy.market.architecture.repository.RepositoryInterface;
+import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.architecture.repository.RepositoryInterface;
 
 public abstract class ServiceAbstract<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
         implements ServiceInterface<ID_TYPE, ENTITY> {

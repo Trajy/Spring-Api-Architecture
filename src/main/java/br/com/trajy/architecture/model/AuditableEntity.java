@@ -1,4 +1,4 @@
-package br.com.trajy.market.architecture.model;
+package br.com.trajy.architecture.model;
 
 import lombok.Getter;
 import lombok.Setter;
