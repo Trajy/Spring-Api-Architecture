@@ -1,8 +1,8 @@
-package br.com.trajy.architecture.controller.config;
+package br.com.trajy.market.architecture.controller.config;
 
-import br.com.trajy.architecture.assembly.AssemblyMapperAbstract;
-import br.com.trajy.architecture.model.AuditableEntity;
-import br.com.trajy.architecture.service.ServiceAbstract;
+import br.com.trajy.market.architecture.assembly.AssemblyMapperAbstract;
+import br.com.trajy.market.architecture.model.AuditableEntity;
+import br.com.trajy.market.architecture.service.ServiceAbstract;
 
 public interface ControllerConfigInteface {
 

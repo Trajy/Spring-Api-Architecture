@@ -1,9 +1,9 @@
-package br.com.trajy.architecture.controller;
+package br.com.trajy.market.architecture.controller;
 
 import static org.springframework.http.ResponseEntity.noContent;
 
-import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.market.architecture.controller.config.ControllerConfigAbstract;
+import br.com.trajy.market.architecture.model.AuditableEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;

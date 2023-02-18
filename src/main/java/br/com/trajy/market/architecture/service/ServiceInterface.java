@@ -1,6 +1,6 @@
-package br.com.trajy.architecture.service;
+package br.com.trajy.market.architecture.service;
 
-import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.market.architecture.model.AuditableEntity;
 import org.springframework.transaction.annotation.Transactional;
 import javax.validation.constraints.NotNull;
 import java.util.List;

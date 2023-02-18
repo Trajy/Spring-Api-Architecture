@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.repository;
+package br.com.trajy.market.architecture.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

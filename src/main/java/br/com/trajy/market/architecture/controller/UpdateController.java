@@ -1,11 +1,11 @@
-package br.com.trajy.architecture.controller;
+package br.com.trajy.market.architecture.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
 
-import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.model.AuditableEntity;
-import br.com.trajy.architecture.resource.AuditableResource;
+import br.com.trajy.market.architecture.controller.config.ControllerConfigAbstract;
+import br.com.trajy.market.architecture.model.AuditableEntity;
+import br.com.trajy.market.architecture.model.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

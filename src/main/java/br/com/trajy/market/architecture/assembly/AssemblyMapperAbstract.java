@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.assembly;
+package br.com.trajy.market.architecture.assembly;
 
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.ListUtils.emptyIfNull;
