@@ -1,11 +1,13 @@
 package br.com.trajy.architecture.controller;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
 
 import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.model.AuditableEntity;
 import br.com.trajy.architecture.resource.AuditableResource;
+import lombok.extern.slf4j.Slf4j;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +19,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
-    Logger log = LoggerFactory.getLogger(UpdateController.class);
+    Logger log = getLogger(UpdateController.class);
 
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 

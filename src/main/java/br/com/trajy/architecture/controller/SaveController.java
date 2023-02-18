@@ -1,5 +1,6 @@
 package br.com.trajy.architecture.controller;
 
+import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.created;
 
@@ -8,7 +9,6 @@ import br.com.trajy.architecture.model.AuditableEntity;
 import br.com.trajy.architecture.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
-    Logger log = LoggerFactory.getLogger(SaveController.class);
+    Logger log = getLogger(SaveController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
