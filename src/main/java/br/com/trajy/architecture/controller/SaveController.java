@@ -21,7 +21,7 @@ public interface SaveController<RESOURCE> {
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    @Transactional(propagation = SUPPORTS, rollbackFor = Exception.class)
+    @Transactional(rollbackFor = Exception.class)
     default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
