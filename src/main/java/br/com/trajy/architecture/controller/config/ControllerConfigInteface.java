@@ -6,10 +6,10 @@ import br.com.trajy.architecture.service.ServiceAbstract;
 
 public interface ControllerConfigInteface {
 
-    <ID_MODEL, ENTITY extends AuditableEntity<ID_MODEL>,
-            SERVICE extends ServiceAbstract<ID_MODEL, ENTITY>> SERVICE getService();
+    <ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>,
+            SERVICE extends ServiceAbstract<ID_TYPE, ENTITY>> SERVICE getService();
 
-    <ID_MODEL, RESOURCE, ENTITY extends AuditableEntity<ID_MODEL>,
-            ASSEMBLY extends AssemblyMapperAbstract<RESOURCE, ENTITY>> ASSEMBLY getAssembler();
+    <ID_TYPE, RESOURCE, ENTITY extends AuditableEntity<ID_TYPE>,
+            ASSEMBLY extends AssemblyMapperAbstract<RESOURCE, ENTITY>> ASSEMBLY getAssembly();
 
 }
