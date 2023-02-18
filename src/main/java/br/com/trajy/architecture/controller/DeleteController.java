@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-public interface DeleteController {
+public interface DeleteController<ID_TYPE> {
 
     Logger log = LoggerFactory.getLogger(DeleteController.class);
 
@@ -20,18 +20,18 @@ public interface DeleteController {
 
     @DeleteMapping(value = "/{id}")
     @Transactional(rollbackFor = Exception.class)
-    default <ID_TYPE> ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpRequest request) {
+    default ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpRequest request) {
         log.info("DELETE | Iniciado | Controller: {}", this.getClass().getSimpleName());
         beforeDelete(request);
         AuditableEntity<Object> entity = getConfig().getService().findById(id);
         getConfig().getService().delete(entity);
-        afterUpdate(request);
+        afterDelete(request);
         log.info("DELETE | Finalizado | Controller: {}", this.getClass().getSimpleName());
         return noContent().build();
     }
 
     default void beforeDelete(HttpRequest request) { }
 
-    default void afterUpdate(HttpRequest request) { }
+    default void afterDelete(HttpRequest request) { }
 
 }

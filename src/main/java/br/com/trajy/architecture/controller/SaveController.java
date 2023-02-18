@@ -2,10 +2,10 @@ package br.com.trajy.architecture.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.created;
-import static org.springframework.transaction.annotation.Propagation.SUPPORTS;
 
 import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.architecture.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +15,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface SaveController<RESOURCE> {
+public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
     Logger log = LoggerFactory.getLogger(SaveController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
@@ -26,7 +26,7 @@ public interface SaveController<RESOURCE> {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
         AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
-        setAuditData(entity);
+        setCreateAuditData(entity);
         getConfig().getService().save(entity);
         afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -37,7 +37,7 @@ public interface SaveController<RESOURCE> {
 
     default void afterSave(RESOURCE resource, HttpRequest request) { }
 
-    private <ID_TYPE> void setAuditData(AuditableEntity<ID_TYPE> entity) {
+    private <ID_TYPE> void setCreateAuditData(AuditableEntity<ID_TYPE> entity) {
         entity.setCratedBy("implementar Obtencao de Loguin");
         entity.setCreatedAt(new DateTime());
     }

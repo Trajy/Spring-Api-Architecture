@@ -2,10 +2,10 @@ package br.com.trajy.architecture.controller;
 
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
-import static org.springframework.transaction.annotation.Propagation.SUPPORTS;
 
 import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.architecture.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-public interface UpdateController<RESOURCE> {
+public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
     Logger log = LoggerFactory.getLogger(UpdateController.class);
 
@@ -28,7 +28,7 @@ public interface UpdateController<RESOURCE> {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
         AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
-        setAuditData(entity);
+        setUpdateAuditData(entity);
         getConfig().getService().update(entity);
         afterUpdate(resource, request);
         log.info("PUT | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -39,7 +39,7 @@ public interface UpdateController<RESOURCE> {
 
     default void afterUpdate(RESOURCE resource, HttpRequest request) { }
 
-    private <ID_TYPE> void setAuditData(AuditableEntity<ID_TYPE> entity) {
+    private <ID_TYPE> void setUpdateAuditData(AuditableEntity<ID_TYPE> entity) {
         entity.setModifiedBy("implementar Obtencao de Loguin");
         entity.setModifiedAt(new DateTime());
     }
