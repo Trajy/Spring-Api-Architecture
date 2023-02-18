@@ -27,7 +27,7 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
     default ResponseEntity<Void> update(@PathVariable String id, @RequestBody RESOURCE resource, HttpRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(resource);
+        AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly().toEntity(resource);
         setUpdateAuditData(entity);
         getConfig().getService().update(entity);
         afterUpdate(resource, request);
