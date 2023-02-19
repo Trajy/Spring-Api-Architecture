@@ -21,7 +21,7 @@
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <jacoco.skip>true</jacoco.skip>
         <mockito.version>3.7.7</mockito.version>
-        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <mapstruct.version>1.5.3.Final</mapstruct.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
         <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
