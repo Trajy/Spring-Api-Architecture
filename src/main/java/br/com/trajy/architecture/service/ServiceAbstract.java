@@ -8,5 +8,4 @@ public abstract class ServiceAbstract<ID_TYPE, ENTITY extends AuditableEntity<ID
         implements FindByIdService<ID_TYPE, ENTITY>, FindByFilterService<ID_TYPE, ENTITY>,
         SaveService<ID_TYPE, ENTITY>, UpdateService<ID_TYPE, ENTITY>, DeleteService<ID_TYPE, ENTITY> {
 
-
 }
