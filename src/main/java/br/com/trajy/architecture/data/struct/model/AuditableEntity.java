@@ -1,5 +1,6 @@
-package br.com.trajy.architecture.model;
+package br.com.trajy.architecture.data.struct.model;
 
+import br.com.trajy.architecture.data.struct.common.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
@@ -8,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AuditableEntity<T> extends PersistableEntity<T> {
+public abstract class AuditableEntity<T> extends Id<T> {
 
     private String cratedBy;
 

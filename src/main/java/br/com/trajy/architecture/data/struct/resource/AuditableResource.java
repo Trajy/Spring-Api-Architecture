@@ -1,5 +1,6 @@
-package br.com.trajy.architecture.resource;
+package br.com.trajy.architecture.data.struct.resource;
 
+import br.com.trajy.architecture.data.struct.common.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
@@ -8,7 +9,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AuditableResource<T> extends IdResource<T> {
+public abstract class AuditableResource<T> extends Id<T> {
 
     private String cratedBy;
 

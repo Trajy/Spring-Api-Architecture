@@ -1,19 +1,18 @@
-package br.com.trajy.architecture.model;
+package br.com.trajy.architecture.data.struct.common;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
 
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class PersistableEntity<T> {
+public abstract class Id<T> {
 
-    @Id
+    @javax.persistence.Id
     @GeneratedValue(strategy = IDENTITY)
     private T id;
 

@@ -4,7 +4,7 @@ import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.ResponseEntity.noContent;
 
 import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.model.AuditableEntity;
+import br.com.trajy.architecture.data.struct.model.AuditableEntity;
 import org.slf4j.Logger;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;

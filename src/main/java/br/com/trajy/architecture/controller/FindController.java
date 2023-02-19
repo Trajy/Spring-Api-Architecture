@@ -5,8 +5,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 import br.com.trajy.architecture.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.model.AuditableEntity;
-import br.com.trajy.architecture.resource.AuditableResource;
+import br.com.trajy.architecture.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;

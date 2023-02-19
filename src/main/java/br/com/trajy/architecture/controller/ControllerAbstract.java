@@ -1,6 +1,6 @@
 package br.com.trajy.architecture.controller;
 
-import br.com.trajy.architecture.resource.AuditableResource;
+import br.com.trajy.architecture.data.struct.resource.AuditableResource;
 
 public abstract class ControllerAbstract<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>>
         implements FindController<ID_TYPE, RESOURCE>, SaveController<ID_TYPE, RESOURCE>,
