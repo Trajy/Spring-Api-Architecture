@@ -1,0 +1,14 @@
+package br.com.trajy.architecture.restful.exception.data.struct.detail;
+
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.SuperBuilder;
+
+@Getter
+@Setter
+@SuperBuilder
+public class FieldMessageError extends ErrorDetail {
+
+    String field;
+
+}
