@@ -1,6 +1,6 @@
-package br.com.trajy.architecture.service;
+package br.com.trajy.architecture.layer.service;
 
-import br.com.trajy.architecture.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

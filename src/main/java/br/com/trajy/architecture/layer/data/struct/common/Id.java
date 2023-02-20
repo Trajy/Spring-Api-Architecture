@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.data.struct.common;
+package br.com.trajy.architecture.layer.data.struct.common;
 
 import static javax.persistence.GenerationType.IDENTITY;
 

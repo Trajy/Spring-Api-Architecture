@@ -1,6 +1,6 @@
-package br.com.trajy.architecture.data.struct.model;
+package br.com.trajy.architecture.layer.data.struct.model;
 
-import br.com.trajy.architecture.data.struct.common.Id;
+import br.com.trajy.architecture.layer.data.struct.common.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;

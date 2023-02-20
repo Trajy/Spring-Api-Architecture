@@ -1,6 +1,6 @@
-package br.com.trajy.architecture.data.struct.resource;
+package br.com.trajy.architecture.layer.data.struct.resource;
 
-import br.com.trajy.architecture.data.struct.common.Id;
+import br.com.trajy.architecture.layer.data.struct.common.Id;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;

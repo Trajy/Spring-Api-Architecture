@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.repository;
+package br.com.trajy.architecture.layer.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

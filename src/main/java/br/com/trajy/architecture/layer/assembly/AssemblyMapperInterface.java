@@ -1,4 +1,4 @@
-package br.com.trajy.architecture.assembly;
+package br.com.trajy.architecture.layer.assembly;
 
 import java.util.List;
 
