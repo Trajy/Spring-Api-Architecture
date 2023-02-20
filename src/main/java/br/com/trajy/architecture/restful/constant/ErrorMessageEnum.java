@@ -16,7 +16,7 @@ public enum ErrorMessageEnum {
         this.message = message;
     }
 
-    public String getMessageFromEnum(ErrorMessageEnum type) {
+    public static String getMessageFromEnum(ErrorMessageEnum type) {
         return find(of(ErrorMessageEnum.values()), value -> value.equals(type)).getMessage();
     }
 
