@@ -4,6 +4,7 @@ import br.com.trajy.architecture.restful.exception.data.struct.detail.ErrorDetai
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 import java.util.List;
 
 /**
@@ -15,14 +16,13 @@ import java.util.List;
 @Builder
 public class ErrorMessage {
 
-    private ErrorMessage() { }
-
     String status;
 
     String title;
 
     String type;
 
-    List<ErrorDetail> detail;
+    @Singular("detail")
+    List<ErrorDetail> details;
 
 }
