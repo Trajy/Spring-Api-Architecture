@@ -7,8 +7,10 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class FieldMessageError  {
+public class FieldErrorMessage {
 
     String field;
+
+    String validation;
 
 }
