@@ -8,7 +8,6 @@ import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 import br.com.trajy.architecture.restful.exception.data.struct.ErrorMessage;
 import br.com.trajy.architecture.restful.exception.data.struct.detail.ErrorDetail;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
