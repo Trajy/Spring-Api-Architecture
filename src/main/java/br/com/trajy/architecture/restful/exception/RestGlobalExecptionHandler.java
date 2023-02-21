@@ -3,10 +3,12 @@ package br.com.trajy.architecture.restful.exception;
 import static java.lang.String.valueOf;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
+import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 
 import br.com.trajy.architecture.restful.exception.data.struct.ErrorMessage;
 import br.com.trajy.architecture.restful.exception.data.struct.detail.ErrorDetail;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -26,10 +28,11 @@ public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(UNPROCESSABLE_ENTITY)
                 .body(ErrorMessage.builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
-                        .title(exception.getMessage())
+                        .title(defaultIfEmpty(exception.getMessage(), "NullPointerException"))
                         .type(request.getRequestURI())
                         .detail(ErrorDetail.builder()
-                                    .error(stream(exception.getStackTrace()).limit(2)
+                                    .error(
+                                            stream(exception.getStackTrace()).limit(2)
                                                     .map(StackTraceElement::toString).collect(joining(" at "))
                                     )
                                     .build()
