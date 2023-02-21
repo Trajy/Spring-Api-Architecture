@@ -7,7 +7,7 @@ import lombok.experimental.SuperBuilder;
 @Getter
 @Setter
 @SuperBuilder
-public class FieldMessageError extends ErrorDetail {
+public class FieldMessageError  {
 
     String field;
 
