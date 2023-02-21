@@ -1,5 +1,8 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.REQUEST_BODY_REQUERED;
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessageFromEnum;
+import static com.google.common.base.Preconditions.checkNotNull;
 import static java.net.URI.create;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -25,7 +28,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
         AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly()
-                .toEntity(resource.getCratedBy());
+                .toEntity(checkNotNull(resource.getCratedBy(), getMessageFromEnum(REQUEST_BODY_REQUERED)));
         setCreateAuditData(entity);
         getConfig().getService().save(entity);
         afterSave(resource, request);
