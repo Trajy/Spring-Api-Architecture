@@ -1,11 +1,8 @@
 package br.com.trajy.architecture.restful.exception.data.struct;
 
-import br.com.trajy.architecture.restful.exception.data.struct.detail.ErrorDetail;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.Singular;
-import java.util.List;
 
 /**
 * Data Structure referenced in the standard RFC7807
@@ -14,7 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Builder
-public class ErrorMessage {
+public class ErrorMessage<T> {
 
     String status;
 
@@ -22,7 +19,6 @@ public class ErrorMessage {
 
     String type;
 
-    @Singular("detail")
-    List<ErrorDetail> detail;
+    T detail;
 
 }
