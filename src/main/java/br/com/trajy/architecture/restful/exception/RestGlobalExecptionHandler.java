@@ -9,7 +9,5 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  */
 @ControllerAdvice
 public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler implements GeneralException {
-
-
-
+    
 }
