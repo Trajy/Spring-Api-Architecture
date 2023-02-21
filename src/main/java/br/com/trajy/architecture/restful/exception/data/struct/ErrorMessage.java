@@ -23,6 +23,6 @@ public class ErrorMessage {
     String type;
 
     @Singular("detail")
-    List<ErrorDetail> details;
+    List<ErrorDetail> detail;
 
 }

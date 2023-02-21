@@ -14,12 +14,12 @@ public abstract class AuditableEntity<T> extends Id<T> {
 
     private String cratedBy;
 
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime createdAt;
 
     private String modifiedBy;
 
-    @Type(type = "org.joda.time.contrib.hibernate.PersistentDateTime")
+    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modifiedAt;
 
 }

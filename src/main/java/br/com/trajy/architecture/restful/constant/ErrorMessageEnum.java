@@ -8,7 +8,8 @@ import lombok.Getter;
 @Getter
 public enum ErrorMessageEnum {
 
-    PATH_URL_ID_REQUIRED("O id deve ser informado");
+    PATH_URL_ID_REQUIRED("Id required in path url"),
+    REQUEST_BODY_REQUERED("Request body required");
 
     private String message;
 
