@@ -1,5 +1,9 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.REQUEST_BODY_REQUERED;
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessageFromEnum;
+import static com.google.common.base.Preconditions.checkNotNull;
+import static java.net.URI.create;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.created;
@@ -7,14 +11,12 @@ import static org.springframework.http.ResponseEntity.created;
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
-import org.apache.commons.collections4.CollectionUtils;
-import org.apache.commons.collections4.ListUtils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import javax.servlet.http.HttpServletRequest;
 
 public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
@@ -22,10 +24,11 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpRequest request) {
+    default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
-        AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly().toEntity(resource);
+        AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly()
+                .toEntity(checkNotNull(resource.getCratedBy()));
         setCreateAuditData(entity);
         getConfig().getService().save(entity);
         afterSave(resource, request);
@@ -33,17 +36,17 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         return buildResponse(resource, request);
     }
 
-    default void beforeSave(RESOURCE resource, HttpRequest request) { }
+    default void beforeSave(RESOURCE resource, HttpServletRequest request) { }
 
-    default void afterSave(RESOURCE resource, HttpRequest request) { }
+    default void afterSave(RESOURCE resource, HttpServletRequest request) { }
 
     private <ID_TYPE> void setCreateAuditData(AuditableEntity<ID_TYPE> entity) {
         entity.setCratedBy("implementar Obtencao de Loguin");
         entity.setCreatedAt(new DateTime());
     }
-    private ResponseEntity<Void> buildResponse(RESOURCE resource, HttpRequest request) {
+    private ResponseEntity<Void> buildResponse(RESOURCE resource, HttpServletRequest request) {
         //TODO - make return headers
-        return created(request.getURI()).build();
+        return created(create(request.getRequestURI())).build();
     }
 
 }

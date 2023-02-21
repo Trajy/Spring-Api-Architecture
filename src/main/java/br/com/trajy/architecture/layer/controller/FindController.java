@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import javax.servlet.http.HttpServletRequest;
 
 public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
@@ -18,7 +19,7 @@ public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
-    default ResponseEntity<RESOURCE> find(ID_TYPE id, HttpRequest request) {
+    default ResponseEntity<RESOURCE> find(ID_TYPE id, HttpServletRequest request) {
         log.info("GET | Iniciado | Controller: {}", this.getClass().getSimpleName());
         beforeFind(request);
         AuditableEntity<Object> entity = getConfig().getService().findById(id);
@@ -29,7 +30,7 @@ public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         return ok().body(resource);
     }
 
-    default void beforeFind(HttpRequest request) { }
+    default void beforeFind(HttpServletRequest request) { }
 
-    default void afterFind(RESOURCE resource, HttpRequest request) { }
+    default void afterFind(RESOURCE resource, HttpServletRequest request) { }
 }

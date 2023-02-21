@@ -10,6 +10,7 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import javax.servlet.http.HttpServletRequest;
 
 public interface DeleteController<ID_TYPE> {
 
@@ -18,7 +19,7 @@ public interface DeleteController<ID_TYPE> {
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @DeleteMapping(value = "/{id}")
-    default ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpRequest request) {
+    default ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("DELETE | Iniciado | Controller: {}", this.getClass().getSimpleName());
         beforeDelete(request);
         AuditableEntity<Object> entity = getConfig().getService().findById(id);
@@ -28,8 +29,8 @@ public interface DeleteController<ID_TYPE> {
         return noContent().build();
     }
 
-    default void beforeDelete(HttpRequest request) { }
+    default void beforeDelete(HttpServletRequest request) { }
 
-    default void afterDelete(HttpRequest request) { }
+    default void afterDelete(HttpServletRequest request) { }
 
 }
