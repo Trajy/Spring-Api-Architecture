@@ -9,7 +9,8 @@ import lombok.Getter;
 public enum ErrorMessageEnum {
 
     PATH_URL_ID_REQUIRED("Id required in path url"),
-    REQUEST_BODY_REQUERED("Request body required");
+    REQUEST_BODY_REQUERED("Request body required"),
+    VIOLATION_CONSTRAINT("Please Verify constraint violations");
 
     private String message;
 
@@ -17,7 +18,7 @@ public enum ErrorMessageEnum {
         this.message = message;
     }
 
-    public static String getMessageFromEnum(ErrorMessageEnum type) {
+    public static String getMessage(ErrorMessageEnum type) {
         return find(of(ErrorMessageEnum.values()), value -> value.equals(type)).getMessage();
     }
 

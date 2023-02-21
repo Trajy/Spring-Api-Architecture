@@ -1,7 +1,7 @@
 package br.com.trajy.architecture.layer.controller;
 
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.PATH_URL_ID_REQUIRED;
-import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessageFromEnum;
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -12,7 +12,6 @@ import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -30,7 +29,7 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
         AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly()
-                .toEntity(checkNotNull(resource, getMessageFromEnum(PATH_URL_ID_REQUIRED)));
+                .toEntity(checkNotNull(resource, getMessage((PATH_URL_ID_REQUIRED))));
         setUpdateAuditData(entity);
         getConfig().getService().update(entity);
         afterUpdate(resource, request);
