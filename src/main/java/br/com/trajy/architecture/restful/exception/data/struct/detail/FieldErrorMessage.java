@@ -13,4 +13,6 @@ public class FieldErrorMessage {
 
     String validation;
 
+    Object value;
+
 }

@@ -1,6 +1,5 @@
 package br.com.trajy.architecture.restful.exception;
 
-import static br.com.trajy.architecture.restful.exception.util.ValidationUtil.checkViolations;
 import static java.util.List.of;
 
 import org.springframework.core.MethodParameter;
