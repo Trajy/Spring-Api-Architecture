@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
  */
 
 @ControllerAdvice
-public class RestGlobalExecptionHandler implements GeneralException,
-    ViolationsInterceptor {
+public class RestGlobalExecptionHandler implements GeneralException, ViolationsInterceptor {
     
 }
