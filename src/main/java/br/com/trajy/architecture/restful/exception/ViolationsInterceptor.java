@@ -31,7 +31,8 @@ public interface ViolationsInterceptor {
                                                 .field(error.getField())
                                                 .validation(error.getDefaultMessage())
                                                 .value(error.getRejectedValue())
-                                        .build()).collect(toList())
+                                                .build()
+                                        ).collect(toList())
                                 ).build()
                         ).build()
                 );
