@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
@@ -25,7 +26,7 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
-    default ResponseEntity<Void> update(@PathVariable String id, @RequestBody RESOURCE resource, HttpServletRequest request) {
+    default ResponseEntity<Void> update(@Valid @RequestBody RESOURCE resource, @PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeUpdate(resource, request);
         AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly()

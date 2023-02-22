@@ -1,8 +1,5 @@
 package br.com.trajy.architecture.layer.controller;
 
-import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.REQUEST_BODY_REQUERED;
-import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessageFromEnum;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static java.net.URI.create;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -17,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
@@ -24,7 +22,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
-    default ResponseEntity<Void> save(@RequestBody RESOURCE resource, HttpServletRequest request) {
+    default ResponseEntity<Void> save(@Valid @RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         beforeSave(resource, request);
         AuditableEntity<Object> entity = (AuditableEntity<Object>) getConfig().getAssembly().toEntity(resource);
@@ -40,7 +38,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     default void afterSave(RESOURCE resource, HttpServletRequest request) { }
 
     private <ID_TYPE> void setCreateAuditData(AuditableEntity<ID_TYPE> entity) {
-        entity.setCratedBy("implementar Obtencao de Loguin");
+        entity.setCreatedBy("implementar Obtencao de Loguin");
         entity.setCreatedAt(new DateTime());
     }
     private ResponseEntity<Void> buildResponse(RESOURCE resource, HttpServletRequest request) {
