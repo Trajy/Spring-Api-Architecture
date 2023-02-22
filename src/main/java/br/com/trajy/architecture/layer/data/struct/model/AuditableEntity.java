@@ -12,7 +12,7 @@ import javax.persistence.MappedSuperclass;
 @MappedSuperclass
 public abstract class AuditableEntity<T> extends Id<T> {
 
-    private String cratedBy;
+    private String createdBy;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime createdAt;
