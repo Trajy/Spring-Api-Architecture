@@ -10,7 +10,8 @@ public enum ErrorMessageEnum {
 
     PATH_URL_ID_REQUIRED("Id required in path url"),
     REQUEST_BODY_REQUERED("Request body required"),
-    VIOLATION_CONSTRAINT("Please Verify constraint violations");
+    RESOURCE_VIOLATION_CONSTRAINT("Please verify Resource constraint violations"),
+    ENTITY_CONSTRAINT_VIOLATION("Please verify Entity constraint violations");
 
     private String message;
 

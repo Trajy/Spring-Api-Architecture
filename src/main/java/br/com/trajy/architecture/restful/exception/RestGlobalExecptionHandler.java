@@ -1,6 +1,6 @@
 package br.com.trajy.architecture.restful.exception;
 
-import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.VIOLATION_CONSTRAINT;
+import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.RESOURCE_VIOLATION_CONSTRAINT;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.toList;
@@ -23,15 +23,16 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
  */
 
 @ControllerAdvice
-public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler implements GeneralException {
+public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler implements GeneralException,
+        PrePersistenceHibernateValidatorHandle {
 
     @Override
-     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
+    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
                                                     HttpHeaders headers, HttpStatus status, WebRequest request) {
         return ResponseEntity.status(UNPROCESSABLE_ENTITY)
                 .body(ErrorMessage.builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
-                        .title(getMessage(VIOLATION_CONSTRAINT))
+                        .title(getMessage(RESOURCE_VIOLATION_CONSTRAINT))
                         .type(request.getContextPath())
                         .detail(ViolationErrorMessage.builder()
                                 .clazz(exception.getTarget().getClass().getSimpleName())
