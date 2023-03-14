@@ -5,6 +5,7 @@ import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMes
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.ResponseEntity.unprocessableEntity;
 
 import br.com.trajy.architecture.restful.exception.data.struct.ErrorMessage;
 import br.com.trajy.architecture.restful.exception.data.struct.detail.FieldErrorMessage;
@@ -29,8 +30,7 @@ public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler i
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
                                                     HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return ResponseEntity.status(UNPROCESSABLE_ENTITY)
-                .body(ErrorMessage.builder()
+        return unprocessableEntity().body(ErrorMessage.builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
                         .title(getMessage(RESOURCE_VIOLATION_CONSTRAINT))
                         .type(request.getContextPath())
