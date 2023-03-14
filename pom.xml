@@ -17,18 +17,26 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-cloud.version>Hoxton.RC1</spring-cloud.version>
+        <spring.cloud-version>2021.0.5</spring.cloud-version>
         <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
         <jacoco.skip>true</jacoco.skip>
         <mockito.version>3.7.7</mockito.version>
         <mapstruct.version>1.5.3.Final</mapstruct.version>
         <jacoco-maven-plugin.version>0.8.5</jacoco-maven-plugin.version>
-        <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
     </properties>
 
     <dependencies>
 
         <!-- SPRING DEPENDENCIES -->
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-starter-config -->
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -51,6 +59,10 @@
             <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -135,7 +147,17 @@
             <scope>compile</scope>
         </dependency>
     </dependencies>
-
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring.cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
