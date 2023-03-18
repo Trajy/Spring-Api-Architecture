@@ -23,7 +23,6 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     Logger log = getLogger(SaveController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
-
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> save(@Valid @RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
