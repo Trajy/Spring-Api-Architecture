@@ -8,7 +8,6 @@ import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstrac
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;

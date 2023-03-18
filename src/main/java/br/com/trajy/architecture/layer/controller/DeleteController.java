@@ -6,7 +6,6 @@ import static org.springframework.http.ResponseEntity.noContent;
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import org.slf4j.Logger;
-import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
