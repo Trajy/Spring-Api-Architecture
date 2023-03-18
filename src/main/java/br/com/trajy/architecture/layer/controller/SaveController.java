@@ -2,6 +2,7 @@ package br.com.trajy.architecture.layer.controller;
 
 import static java.lang.String.valueOf;
 import static java.net.URI.create;
+import static org.apache.commons.lang3.StringUtils.appendIfMissing;
 import static org.joda.time.DateTime.now;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
@@ -33,7 +34,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
         // TODO - verify if location is generated correctly
-        return created(create(request.getRequestURI().concat(valueOf(entity.getId())))).build();
+        return created(create(appendIfMissing(request.getRequestURI(), "/").concat(valueOf(entity.getId())))).build();
     }
 
     default void beforeSave(RESOURCE resource, HttpServletRequest request) { }
