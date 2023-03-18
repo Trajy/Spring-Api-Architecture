@@ -1,6 +1,6 @@
 package br.com.trajy.architecture.layer.data.struct.model;
 
-import br.com.trajy.architecture.layer.data.struct.common.Id;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
@@ -10,7 +10,7 @@ import javax.persistence.MappedSuperclass;
 @Getter
 @Setter
 @MappedSuperclass
-public abstract class AuditableEntity<T> extends Id<T> {
+public abstract class AuditableEntity<T> extends Identity<T> {
 
     private String createdBy;
 
