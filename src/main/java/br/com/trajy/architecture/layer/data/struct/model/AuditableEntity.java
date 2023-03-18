@@ -22,4 +22,6 @@ public abstract class AuditableEntity<T> extends Id<T> {
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modifiedAt;
 
+    private String ip;
+
 }

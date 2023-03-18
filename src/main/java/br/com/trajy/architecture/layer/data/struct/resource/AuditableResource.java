@@ -19,4 +19,6 @@ public abstract class AuditableResource<T> extends Id<T> {
 
     private DateTime modifiedAt;
 
+    private String ip;
+
 }
