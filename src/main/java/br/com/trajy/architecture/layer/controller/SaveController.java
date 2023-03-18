@@ -26,9 +26,9 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> save(@Valid @RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
+        setCreateAuditData(resource, request);
         beforeSave(resource, request);
         AuditableEntity entity = (AuditableEntity) getConfig().getAssembly().toEntity(resource);
-        setCreateAuditData(entity);
         entity = getConfig().getService().save(entity);
         afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -39,9 +39,10 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
 
     default void afterSave(RESOURCE resource, HttpServletRequest request) { }
 
-    private void setCreateAuditData(AuditableEntity<ID_TYPE> entity) {
-        entity.setCreatedBy("implementar Obtencao de Loguin");
-        entity.setCreatedAt(now());
+    private void setCreateAuditData(RESOURCE resource, HttpServletRequest request) {
+        resource.setCreatedBy("implementar Obtencao de Loguin");
+        resource.setCreatedAt(now());
+        resource.setIp(request.getRemoteAddr());
     }
 
 }
