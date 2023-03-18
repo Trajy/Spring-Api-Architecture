@@ -16,10 +16,8 @@ public interface SaveService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>> {
         return entity;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     default void beforeSave(ENTITY entity) { }
 
-    @Transactional(rollbackFor = Exception.class)
     default void afterSave(ENTITY entity) { }
 
 }

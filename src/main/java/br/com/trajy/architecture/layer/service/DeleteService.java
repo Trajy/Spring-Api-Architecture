@@ -15,10 +15,8 @@ public interface DeleteService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
         afterDelete();
     }
 
-    @Transactional(rollbackFor = Exception.class)
     default void beforeDelete(ENTITY entity) { }
 
-    @Transactional(rollbackFor = Exception.class)
     default void afterDelete() { }
 
 }

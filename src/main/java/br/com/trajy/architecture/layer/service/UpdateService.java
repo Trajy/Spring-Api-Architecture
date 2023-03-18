@@ -16,10 +16,8 @@ public interface UpdateService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
         return entity;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     default void beforeUpdate(ENTITY entity) { }
 
-    @Transactional(rollbackFor = Exception.class)
     default void afterUpdate(ENTITY entity)  { }
 
 }

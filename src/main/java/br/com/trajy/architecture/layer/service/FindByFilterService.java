@@ -18,10 +18,8 @@ public interface FindByFilterService<ID_TYPE, ENTITY extends AuditableEntity<ID_
         return null;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     default void beforeFindByFilter() { }
 
-    @Transactional(rollbackFor = Exception.class)
     default void afterFindByFilter() { }
 
 }

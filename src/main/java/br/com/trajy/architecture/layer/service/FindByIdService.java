@@ -16,10 +16,8 @@ public interface FindByIdService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE
         return entity;
     }
 
-    @Transactional(rollbackFor = Exception.class)
     default void beforeFind(ID_TYPE id) { }
 
-    @Transactional(rollbackFor = Exception.class)
     default void afterFind(ID_TYPE id, ENTITY entity) { }
 
 }
