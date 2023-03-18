@@ -33,7 +33,6 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         entity = getConfig().getService().save(entity);
         afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
-        // TODO - verify if location is generated correctly
         return created(create(appendIfMissing(request.getRequestURI(), "/").concat(valueOf(entity.getId())))).build();
     }
 
