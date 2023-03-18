@@ -31,7 +31,6 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         setCreateAuditData(entity);
         entity = getConfig().getService().save(entity);
         afterSave(resource, request);
-        afterSave(entity, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
         return created(create(appendIfMissing(request.getRequestURI(), "/").concat(valueOf(entity.getId())))).build();
     }
@@ -39,8 +38,6 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     default void beforeSave(RESOURCE resource, HttpServletRequest request) { }
 
     default void afterSave(RESOURCE resource, HttpServletRequest request) { }
-
-    default void afterSave(AuditableEntity<ID_TYPE> entity, HttpServletRequest request) { }
 
     private void setCreateAuditData(AuditableEntity<ID_TYPE> entity) {
         entity.setCreatedBy("implementar Obtencao de Loguin");
