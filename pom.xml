@@ -70,6 +70,15 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- OPEN API DEPENDENCIES -->
+        <dependency>
+            <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-webmvc-core -->
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-webmvc-core</artifactId>
+            <version>1.6.15</version>
+        </dependency>
+
+
         <!-- RESILIENCE4J DEPENDENCIES -->
         <dependency>
             <groupId>io.github.resilience4j</groupId>
