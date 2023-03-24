@@ -28,7 +28,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         setCreateAuditData(resource, request);
         beforeSave(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity((AuditableResource<Object>) resource);
+        AuditableEntity entity = getConfig().getAssembly().toEntity(AuditableResource.class.cast(resource));
         getConfig().getService().save(entity);
         afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
