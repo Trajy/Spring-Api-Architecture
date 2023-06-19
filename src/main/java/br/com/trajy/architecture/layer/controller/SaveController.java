@@ -12,6 +12,7 @@ import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstrac
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,6 +24,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     Logger log = getLogger(SaveController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
+    @SchemaMapping
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> save(@Valid @RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);

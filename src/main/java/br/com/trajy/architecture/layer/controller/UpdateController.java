@@ -12,6 +12,7 @@ import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -25,6 +26,7 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
 
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
+    @SchemaMapping
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> update(@Valid @RequestBody RESOURCE resource, @PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);

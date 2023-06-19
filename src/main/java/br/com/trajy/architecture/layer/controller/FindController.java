@@ -8,6 +8,7 @@ import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstrac
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
+import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +18,7 @@ public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     Logger log = getLogger(FindController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
+    @SchemaMapping
     @GetMapping(value = "/{id}", produces = APPLICATION_JSON_VALUE)
     default ResponseEntity<RESOURCE> find(ID_TYPE id, HttpServletRequest request) {
         log.info("GET | Iniciado | Controller: {}", this.getClass().getSimpleName());
