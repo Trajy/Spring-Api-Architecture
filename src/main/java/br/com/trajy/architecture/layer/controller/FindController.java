@@ -30,7 +30,6 @@ public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         this.beforeFind(id, request);
         AuditableEntity<Object> entity = getConfig().getService().findById(checkNotNull(id, getMessage(PATH_URL_ID_REQUIRED)));
         RESOURCE resource = (RESOURCE) getConfig().getAssembly().toResource(entity);
-        this.getConfig().getService().save(entity);
         this.afterFind(resource, request);
         log.info("GET | Finalizado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         return ok().body(resource);
