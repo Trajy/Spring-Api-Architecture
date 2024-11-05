@@ -22,17 +22,18 @@ import javax.validation.Valid;
 public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
     Logger log = getLogger(SaveController.class);
+
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @SchemaMapping
     @PostMapping(consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> save(@Valid @RequestBody RESOURCE resource, HttpServletRequest request) {
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
-        setCreateAuditData(resource, request);
-        beforeSave(resource, request);
-        AuditableEntity entity = getConfig().getAssembly().toEntity(AuditableResource.class.cast(resource));
-        getConfig().getService().save(entity);
-        afterSave(resource, request);
+        this.setCreateAuditData(resource, request);
+        this.beforeSave(resource, request);
+        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(AuditableResource.class.cast(resource));
+        this.getConfig().getService().save(entity);
+        this.afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
         return created(create(appendIfMissing(request.getRequestURI(), "/").concat(valueOf(entity.getId())))).build();
     }
@@ -42,7 +43,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     default void afterSave(RESOURCE resource, HttpServletRequest request) { }
 
     private void setCreateAuditData(RESOURCE resource, HttpServletRequest request) {
-        resource.setCreatedBy("implementar Obtencao de Loguin");
+        resource.setCreatedBy(null);
         resource.setCreatedAt(now());
         resource.setIp(request.getRemoteAddr());
     }

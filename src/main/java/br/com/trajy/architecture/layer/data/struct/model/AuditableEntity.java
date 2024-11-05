@@ -7,9 +7,9 @@ import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
 import javax.persistence.MappedSuperclass;
 
+@MappedSuperclass
 @Getter
 @Setter
-@MappedSuperclass
 public abstract class AuditableEntity<T> extends Identity<T> {
 
     private String createdBy;

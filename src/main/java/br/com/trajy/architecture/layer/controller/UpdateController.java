@@ -3,6 +3,7 @@ package br.com.trajy.architecture.layer.controller;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.PATH_URL_ID_REQUIRED;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.joda.time.DateTime.now;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
@@ -30,8 +31,9 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
     @PutMapping(value = "/{id}", consumes = APPLICATION_JSON_VALUE)
     default ResponseEntity<Void> update(@Valid @RequestBody RESOURCE resource, @PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
-        beforeUpdate(resource, request);
-        AuditableEntity<Object> entity = (AuditableEntity) getConfig().getAssembly()
+        this.setId(id, resource);
+        this.beforeUpdate(resource, request);
+        AuditableEntity<Object> entity = getConfig().getAssembly()
                 .toEntity((AuditableResource<Object>) checkNotNull(resource, getMessage((PATH_URL_ID_REQUIRED))));
         setUpdateAuditData(entity);
         getConfig().getService().update(entity);
@@ -44,9 +46,13 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
 
     default void afterUpdate(RESOURCE resource, HttpServletRequest request) { }
 
+    private void setId(ID_TYPE id, RESOURCE resource) {
+        resource.setId(id);
+    }
+
     private <ID_TYPE> void setUpdateAuditData(AuditableEntity<ID_TYPE> entity) {
-        entity.setModifiedBy("implementar Obtencao de Loguin");
-        entity.setModifiedAt(new DateTime());
+        entity.setModifiedBy("");
+        entity.setModifiedAt(now());
     }
 
 }

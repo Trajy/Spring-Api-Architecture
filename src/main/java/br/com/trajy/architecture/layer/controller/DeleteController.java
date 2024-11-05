@@ -22,16 +22,16 @@ public interface DeleteController<ID_TYPE> {
     @DeleteMapping(value = "/{id}")
     default ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("DELETE | Iniciado | Controller: {}", this.getClass().getSimpleName());
-        beforeDelete(request);
+        this.beforeDelete(id, request);
         AuditableEntity<Object> entity = getConfig().getService().findById(id);
-        getConfig().getService().delete(entity);
-        afterDelete(request);
+        this.getConfig().getService().delete(entity);
+        this.afterDelete(id, request);
         log.info("DELETE | Finalizado | Controller: {}", this.getClass().getSimpleName());
         return noContent().build();
     }
 
-    default void beforeDelete(HttpServletRequest request) { }
+    default void beforeDelete(ID_TYPE id, HttpServletRequest request) { }
 
-    default void afterDelete(HttpServletRequest request) { }
+    default void afterDelete(ID_TYPE id, HttpServletRequest request) { }
 
 }
