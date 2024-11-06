@@ -32,8 +32,8 @@ public interface GeneralException {
         );
     }
 
-    @ExceptionHandler(IllegalAccessException.class)
-    default ResponseEntity<ErrorMessage> illegalAccessExceptionHandler(IllegalArgumentException exception, HttpServletRequest request) {
+    @ExceptionHandler(IllegalArgumentException.class)
+    default ResponseEntity<ErrorMessage> illegalArgumentException(IllegalArgumentException exception, HttpServletRequest request) {
         logException(exception);
         return unprocessableEntity().body(ErrorMessage.builder()
                 .status(valueOf(UNPROCESSABLE_ENTITY.value()))
