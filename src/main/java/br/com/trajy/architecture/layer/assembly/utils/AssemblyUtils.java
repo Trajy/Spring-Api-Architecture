@@ -5,13 +5,10 @@ import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
 
-import br.com.trajy.architecture.config.ApplicationContextStaticConfig;
 import br.com.trajy.architecture.layer.assembly.AssemblyMapperInterface;
-import org.springframework.context.annotation.Import;
 import java.util.List;
 import java.util.function.Consumer;
 
-@Import(ApplicationContextStaticConfig.class)
 public final class AssemblyUtils {
 
     private AssemblyUtils() { }
