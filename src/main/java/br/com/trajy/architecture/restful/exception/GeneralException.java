@@ -5,6 +5,7 @@ import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.defaultIfEmpty;
 import static org.slf4j.LoggerFactory.getLogger;
+import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 import static org.springframework.http.ResponseEntity.badRequest;
 
@@ -21,10 +22,12 @@ public interface GeneralException {
     @ExceptionHandler(NullPointerException.class)
     default ResponseEntity<ErrorMessage> nullPointerExeptionHandler(NullPointerException exception,
                                                                    HttpServletRequest request) {
-        log.error(exception.getStackTrace().toString());
+        String stackTrace = stream(exception.getStackTrace()).limit(10)
+                .map(StackTraceElement::toString).collect(joining(" at "));
+        log.error(stackTrace);
         return badRequest().body(ErrorMessage.builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
-                        .title(defaultIfEmpty(exception.getMessage(), "NullPointerException"))
+                        .title(INTERNAL_SERVER_ERROR.name())
                         .type(request.getRequestURI())
                         .detail(exception.getMessage())
                         .build()
