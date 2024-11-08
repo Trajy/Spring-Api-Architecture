@@ -19,9 +19,9 @@ import javax.validation.ConstraintViolationException;
 public interface PrePersistenceHibernateValidatorHandle {
 
     @ExceptionHandler(ConstraintViolationException.class)
-    default ResponseEntity<ErrorMessage<?>> handleConstraintViolation(ConstraintViolationException exception,
+    default ResponseEntity<ErrorMessage<ViolationErrorMessage>> handleConstraintViolation(ConstraintViolationException exception,
                                                                       HttpServletRequest request) {
-        return unprocessableEntity().body(ErrorMessage.builder()
+        return unprocessableEntity().body(ErrorMessage.<ViolationErrorMessage>builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
                         .title(getMessage(ENTITY_CONSTRAINT_VIOLATION))
                         .type(request.getRequestURI())

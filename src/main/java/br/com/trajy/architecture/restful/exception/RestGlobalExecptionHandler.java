@@ -29,8 +29,8 @@ public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler i
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
-                                                    HttpHeaders headers, HttpStatus status, WebRequest request) {
-        return unprocessableEntity().body(ErrorMessage.builder()
+                                                                  HttpHeaders headers, HttpStatus status, WebRequest request) {
+        return unprocessableEntity().body(ErrorMessage.<ViolationErrorMessage>builder()
                         .status(valueOf(UNPROCESSABLE_ENTITY.value()))
                         .title(getMessage(RESOURCE_VIOLATION_CONSTRAINT))
                         .type(request.getContextPath())
