@@ -14,8 +14,8 @@ public final class ExceptionHandlerUtils {
 
     private ExceptionHandlerUtils() { }
 
-    public static void logException(Exception exception) {
-        String stackTrace = stream(exception.getStackTrace()).limit(30)
+    public static <E extends Exception> void logException(E exception) {
+        String stackTrace = stream(exception.getStackTrace()).limit(50)
                 .map(StackTraceElement::toString).collect(joining(" at "));
         log.error(
                 exception.getClass().getSimpleName()
