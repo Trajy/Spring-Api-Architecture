@@ -18,6 +18,10 @@ public class ApplicationContextStatic {
     public static ApplicationContext obtainContext() {
         return checkNotNull(staticContext, "Static variable with application context is null, please add ApplicationContextStatic.class in @Import annotation or other configuration method.");
     }
+    
+    public static <T> T getBean(Class<T> clazz) {
+        return obtainContext().getBean(clazz);
+    }
 
     @PostConstruct
     public void setInscanceIntoStaticVariable() {

@@ -1,6 +1,6 @@
 package br.com.trajy.architecture.layer.assembly.utils;
 
-import static br.com.trajy.architecture.config.ApplicationContextStatic.obtainContext;
+import static br.com.trajy.architecture.config.ApplicationContextStatic.getBean;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
@@ -17,7 +17,7 @@ public final class AssemblyUtils {
         if(isEmpty(sources)) {
             return null;
         }
-        A assembly = obtainContext().getBean(assemblyClazz);
+        A assembly = getBean(assemblyClazz);
         return sources.stream()
                 .map(entity -> {
                     actionFunc.accept(entity);
@@ -30,7 +30,7 @@ public final class AssemblyUtils {
         if(isNull(source)) {
             return null;
         }
-        A assembly = obtainContext().getBean(assemblyClazz);
+        A assembly = getBean(assemblyClazz);
         actionFunc.run();
         return (DESTINATION) assembly.toResource(source);
     }

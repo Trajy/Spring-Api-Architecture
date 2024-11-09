@@ -1,9 +1,8 @@
 package br.com.trajy.architecture.layer.service.utils;
 
 
-import static br.com.trajy.architecture.config.ApplicationContextStatic.obtainContext;
+import static br.com.trajy.architecture.config.ApplicationContextStatic.getBean;
 import static com.google.common.base.Preconditions.checkArgument;
-import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
 import static java.lang.String.valueOf;
 import static java.util.Objects.nonNull;
@@ -21,7 +20,7 @@ public final class ServiceUtils {
         String entityClazzName = getSimpleName(entityClazz);
         checkArgument(nonNull(entity), entityClazzName.concat(SPACE).concat("entity com id deve ser informado"));
         checkArgument(nonNull(entity.getId()), "id da entity".concat(SPACE).concat(entityClazzName).concat(SPACE).concat("deve ser informado"));
-        E foundEntity = obtainContext().getBean(serviceClass).findById(entity.getId());
+        E foundEntity = getBean(serviceClass).findById(entity.getId());
         checkState(
             nonNull(foundEntity),
             entity.getClass().getSimpleName()
