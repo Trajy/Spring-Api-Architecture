@@ -1,20 +1,22 @@
 package br.com.trajy.architecture.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import static com.google.common.base.Preconditions.checkNotNull;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Configuration;
 import javax.annotation.PostConstruct;
 
 @Configuration
-public class ApplicationContextStaticConfig {
+@RequiredArgsConstructor
+public class ApplicationContextStatic {
 
-    @Autowired
     private ApplicationContext instanceContext;
 
     private static ApplicationContext staticContext;
 
     public static ApplicationContext obtainContext() {
-        return staticContext;
+        return checkNotNull(staticContext, "Static variable with application context is null, please add ApplicationContextStatic.class in @Import annotation or other configuration method.");
     }
 
     @PostConstruct

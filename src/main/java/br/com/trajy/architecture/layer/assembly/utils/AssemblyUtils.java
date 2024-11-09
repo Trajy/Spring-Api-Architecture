@@ -1,6 +1,6 @@
 package br.com.trajy.architecture.layer.assembly.utils;
 
-import static br.com.trajy.architecture.config.ApplicationContextStaticConfig.obtainContext;
+import static br.com.trajy.architecture.config.ApplicationContextStatic.obtainContext;
 import static java.util.Objects.isNull;
 import static java.util.stream.Collectors.toList;
 import static org.apache.commons.collections4.CollectionUtils.isEmpty;
