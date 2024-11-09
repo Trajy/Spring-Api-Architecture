@@ -22,7 +22,7 @@ public final class ApplicationContextStatic {
     public static ApplicationContext obtainContext() {
         return checkNotNull(
                 staticContext,
-                "Static variable with application context is null, please add ApplicationContextStatic.class in @Import annotation or other configuration method"
+                "Static variable with application context is null, please add ApplicationContextStatic.class in @Import annotation or other configuration method."
         );
     }
 
