@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class ApplicationContextStatic {
 
-    private ApplicationContext instanceContext;
+    private final ApplicationContext instanceContext;
 
     private static ApplicationContext staticContext;
 
