@@ -1,7 +1,7 @@
 package br.com.trajy.architecture.layer.service.utils;
 
 
-import static br.com.trajy.architecture.config.ApplicationContextStaticConfig.obtainContext;
+import static br.com.trajy.architecture.config.ApplicationContextStatic.obtainContext;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkNotNull;
 import static com.google.common.base.Preconditions.checkState;
@@ -12,7 +12,6 @@ import static org.apache.commons.lang3.StringUtils.SPACE;
 
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.service.ServiceAbstract;
-import org.apache.commons.lang3.ClassUtils;
 
 public final class ServiceUtils {
 
