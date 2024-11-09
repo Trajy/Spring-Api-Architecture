@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public final class ApplicationContextStatic {
+public class ApplicationContextStatic {
 
     private ApplicationContextStatic() { }
 
