@@ -10,7 +10,6 @@ import static org.springframework.http.ResponseEntity.ok;
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
-import com.google.common.base.Preconditions;
 import org.slf4j.Logger;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import javax.servlet.http.HttpServletRequest;
 
-public interface FindController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
+public interface FindByIdController<ID_TYPE, RESOURCE extends AuditableResource<ID_TYPE>> {
 
-    Logger log = getLogger(FindController.class);
+    Logger log = getLogger(FindByIdController.class);
     <CONFIG extends ControllerConfigAbstract> CONFIG getConfig();
 
     @SchemaMapping
