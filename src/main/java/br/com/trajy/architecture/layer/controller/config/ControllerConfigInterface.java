@@ -5,7 +5,7 @@ import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import br.com.trajy.architecture.layer.service.ServiceAbstract;
 
-public interface ControllerConfigInteface {
+public interface ControllerConfigInterface {
 
     <ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>,
             SERVICE extends ServiceAbstract<ID_TYPE, ENTITY>> SERVICE getService();
