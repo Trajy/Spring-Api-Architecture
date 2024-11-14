@@ -22,7 +22,7 @@ public abstract class AssemblyMapperAbstract<RESOURCE, ENTITY> implements Assemb
         if(isEmpty(resources)) {
             return null;
         }
-        return resources.stream().map(this::toEntity).collect(toList()));
+        return resources.stream().map(this::toEntity).collect(toList());
     }
 
 }
