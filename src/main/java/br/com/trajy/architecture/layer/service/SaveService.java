@@ -16,9 +16,9 @@ public interface SaveService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>> {
     @Transactional(rollbackFor = Exception.class)
     default ENTITY save(ENTITY entity) {
         checkState(isNull(entity), formatSaveErrorMessage(entity));
-        beforeSave(entity);
-        entity = getRepository().save(entity);
-        afterSave(entity);
+        this.beforeSave(entity);
+        entity = this.getRepository().save(entity);
+        this.afterSave(entity);
         return entity;
     }
 
