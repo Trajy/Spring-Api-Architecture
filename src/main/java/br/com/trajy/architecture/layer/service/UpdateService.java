@@ -15,9 +15,9 @@ public interface UpdateService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
     @Transactional(rollbackFor = Exception.class)
     default ENTITY update(ENTITY entity) {
         checkState(nonNull(entity.getId()), formatUpdateErrorMessage(entity));
-        beforeUpdate(entity);
-        entity = getRepository().save(entity);
-        afterUpdate(entity);
+        this.beforeUpdate(entity);
+        entity = this.getRepository().save(entity);
+        this.afterUpdate(entity);
         return entity;
     }
 
