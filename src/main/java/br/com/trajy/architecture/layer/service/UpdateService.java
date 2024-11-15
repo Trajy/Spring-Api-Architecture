@@ -1,5 +1,9 @@
 package br.com.trajy.architecture.layer.service;
 
+import static br.com.trajy.architecture.layer.service.utils.ServiceUtils.formatUpdateErrorMessage;
+import static com.google.common.base.Preconditions.checkState;
+import static java.util.Objects.nonNull;
+
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +14,7 @@ public interface UpdateService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
 
     @Transactional(rollbackFor = Exception.class)
     default ENTITY update(ENTITY entity) {
+        checkState(nonNull(entity.getId()), formatUpdateErrorMessage(entity));
         beforeUpdate(entity);
         entity = getRepository().save(entity);
         afterUpdate(entity);

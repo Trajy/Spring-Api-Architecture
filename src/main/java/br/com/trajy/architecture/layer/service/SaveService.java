@@ -1,6 +1,11 @@
 package br.com.trajy.architecture.layer.service;
 
+import static br.com.trajy.architecture.layer.service.utils.ServiceUtils.formatSaveErrorMessage;
+import static com.google.common.base.Preconditions.checkState;
+import static java.util.Objects.isNull;
+
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.service.utils.ServiceUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -10,6 +15,7 @@ public interface SaveService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>> {
 
     @Transactional(rollbackFor = Exception.class)
     default ENTITY save(ENTITY entity) {
+        checkState(isNull(entity), formatSaveErrorMessage(entity));
         beforeSave(entity);
         entity = getRepository().save(entity);
         afterSave(entity);
