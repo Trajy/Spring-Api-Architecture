@@ -10,9 +10,9 @@ public interface DeleteService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>>
 
     @Transactional(rollbackFor = Exception.class)
     default void delete(ENTITY entity) {
-        beforeDelete(entity);
-        getRepository().delete(entity);
-        afterDelete();
+        this.beforeDelete(entity);
+        this.getRepository().delete(entity);
+        this.afterDelete();
     }
 
     default void beforeDelete(ENTITY entity) { }
