@@ -35,7 +35,7 @@ public final class ServiceUtils {
     }
 
     public static <ID_TYPE, E extends Identity<ID_TYPE>> String formatSaveErrorMessage(E entity) {
-        return format("id from %s must be null to update", entity.getClass().getSimpleName());
+        return format("id from %s must be null to save", entity.getClass().getSimpleName());
     }
 
     public static <ID_TYPE, E extends Identity<ID_TYPE>> String formatUpdateErrorMessage(E entity) {
