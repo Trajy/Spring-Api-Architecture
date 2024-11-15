@@ -14,7 +14,7 @@ public interface FindByIdService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE
     default ENTITY findById(ID_TYPE id) {
         this.beforeFind(id);
         ENTITY entity = this.getRepository().findById(id)
-                .orElseThrow(() -> new IllegalArgumentException(format("Entity no found for id: %f", id)));
+                .orElseThrow(() -> new IllegalArgumentException(format("Entity no found for id: %d", id)));
         this.afterFind(id, entity);
         return entity;
     }
