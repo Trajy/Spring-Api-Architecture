@@ -38,7 +38,7 @@ public final class ServiceUtils {
 
     public static <ID_TYPE, E extends AuditableEntity<ID_TYPE>, S extends FindByIdService<ID_TYPE, E>> String formatNotFoundEntityErrorMessage(Class<S> findByIdClazz, ID_TYPE id) {
         return format(
-            "%s no found for id: %d",
+            "not found %s for id: %d",
             asList(requireNonNull(resolveTypeArguments(findByIdClazz, FindByIdService.class))).get(1).getSimpleName(),
             id
         );
