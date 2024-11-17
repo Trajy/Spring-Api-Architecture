@@ -15,6 +15,7 @@ import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.service.FindByIdService;
 import br.com.trajy.architecture.layer.service.ServiceAbstract;
+import java.util.Objects;
 
 public final class ServiceUtils {
 
@@ -38,7 +39,7 @@ public final class ServiceUtils {
 
     public static <ID_TYPE, E extends AuditableEntity<ID_TYPE>, S extends FindByIdService<ID_TYPE, E>> String formatNotFoundEntityErrorMessage(Class<S> findByIdClazz, ID_TYPE id) {
         return format(
-            "not found %s for id: %d",
+            "not found %s for id: %s",
             asList(requireNonNull(resolveTypeArguments(findByIdClazz, FindByIdService.class))).get(1).getSimpleName(),
             id
         );
