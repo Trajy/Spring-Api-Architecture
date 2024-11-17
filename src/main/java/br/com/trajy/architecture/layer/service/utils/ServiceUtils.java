@@ -5,11 +5,15 @@ import static br.com.trajy.architecture.config.ApplicationContextStatic.getBean;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static java.lang.String.format;
+import static java.util.Arrays.asList;
 import static java.util.Objects.nonNull;
+import static java.util.Objects.requireNonNull;
 import static org.apache.commons.lang3.ClassUtils.getSimpleName;
+import static org.springframework.core.GenericTypeResolver.resolveTypeArguments;
 
 import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.service.FindByIdService;
 import br.com.trajy.architecture.layer.service.ServiceAbstract;
 
 public final class ServiceUtils {
@@ -32,4 +36,11 @@ public final class ServiceUtils {
         return format("id from %s can't be null to update", entity.getClass().getSimpleName());
     }
 
+    public static <ID_TYPE, E extends AuditableEntity<ID_TYPE>, S extends FindByIdService<ID_TYPE, E>> String formatNotFoundEntityErrorMessage(Class<S> findByIdClazz, ID_TYPE id) {
+        return format(
+            "%s no found for id: %d",
+            asList(requireNonNull(resolveTypeArguments(findByIdClazz, FindByIdService.class))).get(1).getSimpleName(),
+            id
+        );
+    }
 }
