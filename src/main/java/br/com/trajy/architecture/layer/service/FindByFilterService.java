@@ -9,10 +9,9 @@ public interface FindByFilterService<ID_TYPE, ENTITY extends AuditableEntity<ID_
 
     <REPOSITORY extends JpaRepository<ENTITY, ID_TYPE>> REPOSITORY getRepository();
 
-    @Transactional(rollbackFor = Exception.class)
+    @Transactional(readOnly = true, rollbackFor = Exception.class)
     default List<ENTITY> findByFilter() {
         beforeFindByFilter();
-        // TODO - implementar na repository;
         getRepository();
         afterFindByFilter();
         return null;
