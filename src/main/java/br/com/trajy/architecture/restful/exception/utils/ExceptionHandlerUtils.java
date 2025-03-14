@@ -1,12 +1,15 @@
 package br.com.trajy.architecture.restful.exception.utils;
 
+import static java.lang.String.format;
 import static java.lang.System.lineSeparator;
 import static java.util.Arrays.stream;
 import static java.util.stream.Collectors.joining;
 import static org.apache.commons.lang3.StringUtils.SPACE;
 import static org.slf4j.LoggerFactory.getLogger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
+import java.util.Objects;
 
 public final class ExceptionHandlerUtils {
 
@@ -27,5 +30,8 @@ public final class ExceptionHandlerUtils {
         );
     }
 
-
+    public <T, I> String generateEntityNotFoundMessage(Class<T> clazz, String fieldName, I propertyValue) {
+        return format("%s not found for %s: %s", clazz.getSimpleName(), fieldName, propertyValue);
+    }
+    
 }

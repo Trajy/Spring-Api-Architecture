@@ -5,7 +5,10 @@ import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMes
 import static com.google.common.collect.Iterables.getFirst;
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.toList;
+import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
+import static org.springframework.http.ResponseEntity.notFound;
+import static org.springframework.http.ResponseEntity.status;
 import static org.springframework.http.ResponseEntity.unprocessableEntity;
 
 import br.com.trajy.architecture.restful.exception.data.struct.ErrorMessage;
@@ -13,10 +16,21 @@ import br.com.trajy.architecture.restful.exception.data.struct.detail.FieldError
 import br.com.trajy.architecture.restful.exception.data.struct.detail.ViolationErrorMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
 public interface JpaExceptionHandler {
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    default ResponseEntity<ErrorMessage<String>> handleEntityNotFound(EntityNotFoundException exception, HttpServletRequest request) {
+        return status(NOT_FOUND).body(ErrorMessage.<String>builder()
+                .status(valueOf(NOT_FOUND.value()))
+                .type(request.getRequestURI())
+                .detail(exception.getMessage())
+                .build()
+        );
+    }
 
     @ExceptionHandler(ConstraintViolationException.class)
     default ResponseEntity<ErrorMessage<ViolationErrorMessage>> handleConstraintViolation(ConstraintViolationException exception,
