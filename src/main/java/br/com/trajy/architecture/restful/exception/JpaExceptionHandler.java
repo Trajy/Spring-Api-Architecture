@@ -7,7 +7,6 @@ import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
-import static org.springframework.http.ResponseEntity.notFound;
 import static org.springframework.http.ResponseEntity.status;
 import static org.springframework.http.ResponseEntity.unprocessableEntity;
 
