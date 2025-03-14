@@ -8,6 +8,7 @@ import static org.springframework.http.ResponseEntity.unprocessableEntity;
 import br.com.trajy.architecture.restful.exception.data.struct.ErrorMessage;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 
 public interface GeneralException {

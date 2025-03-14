@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
 
-public interface PrePersistenceHibernateValidatorHandle {
+public interface JpaExceptionHandler {
 
     @ExceptionHandler(ConstraintViolationException.class)
     default ResponseEntity<ErrorMessage<ViolationErrorMessage>> handleConstraintViolation(ConstraintViolationException exception,
