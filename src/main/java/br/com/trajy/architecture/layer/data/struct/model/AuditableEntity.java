@@ -1,12 +1,11 @@
 package br.com.trajy.architecture.layer.data.struct.model;
 
 import br.com.trajy.architecture.layer.data.struct.common.Identity;
-import lombok.Getter;
-import lombok.Setter;
-import org.hibernate.annotations.Type;
-import org.joda.time.DateTime;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
+import lombok.Getter;
+import lombok.Setter;
+import java.time.ZonedDateTime;
 
 @MappedSuperclass
 @Getter
@@ -16,16 +15,14 @@ public abstract class AuditableEntity<T> extends Identity<T> {
     @Column(updatable = false)
     private String createdBy;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     @Column(updatable = false)
-    private DateTime createdAt;
+    private ZonedDateTime createdAt;
 
     private String createdIp;
 
     private String modifiedBy;
 
-    @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
-    private DateTime modifiedAt;
+    private ZonedDateTime modifiedAt;
 
     private String modifiedIp;
 

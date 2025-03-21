@@ -2,8 +2,8 @@ package br.com.trajy.architecture.layer.controller;
 
 import static java.lang.String.valueOf;
 import static java.net.URI.create;
+import static java.time.ZonedDateTime.now;
 import static org.apache.commons.lang3.StringUtils.appendIfMissing;
-import static org.joda.time.DateTime.now;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.created;
