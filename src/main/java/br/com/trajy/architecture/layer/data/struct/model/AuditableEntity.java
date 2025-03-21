@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Type;
 import org.joda.time.DateTime;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Getter
@@ -20,11 +20,14 @@ public abstract class AuditableEntity<T> extends Identity<T> {
     @Column(updatable = false)
     private DateTime createdAt;
 
+    private String createdIp;
+
     private String modifiedBy;
 
     @Type(type = "org.jadira.usertype.dateandtime.joda.PersistentDateTime")
     private DateTime modifiedAt;
 
-    private String ip;
+    private String modifiedIp;
+
 
 }

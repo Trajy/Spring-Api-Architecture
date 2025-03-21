@@ -45,7 +45,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     private void setCreateAuditData(RESOURCE resource, HttpServletRequest request) {
         resource.setCreatedBy(null);
         resource.setCreatedAt(now());
-        resource.setIp(request.getRemoteAddr());
+        resource.setCreatedIp(request.getRemoteAddr());
     }
 
 }

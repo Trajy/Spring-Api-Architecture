@@ -35,7 +35,7 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
         this.beforeUpdate(resource, request);
         AuditableEntity<Object> entity = getConfig().getAssembly()
                 .toEntity((AuditableResource<Object>) checkNotNull(resource, getMessage((PATH_URL_ID_REQUIRED))));
-        this.setUpdateAuditData(entity);
+        this.setUpdateAuditData(entity, request);
         this.getConfig().getService().update(entity);
         this.afterUpdate(resource, request);
         log.info("PUT | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -50,9 +50,10 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
         resource.setId(id);
     }
 
-    private <ID_TYPE> void setUpdateAuditData(AuditableEntity<ID_TYPE> entity) {
+    private <ID_TYPE> void setUpdateAuditData(AuditableEntity<ID_TYPE> entity, HttpServletRequest request) {
         entity.setModifiedBy("");
         entity.setModifiedAt(now());
+        entity.setModifiedIp(request.getRemoteAddr());
     }
 
 }

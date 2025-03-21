@@ -4,7 +4,7 @@ import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import lombok.Getter;
 import lombok.Setter;
 import org.joda.time.DateTime;
-import javax.persistence.MappedSuperclass;
+import jakarta.persistence.MappedSuperclass;
 
 @Getter
 @Setter
@@ -15,10 +15,14 @@ public abstract class AuditableResource<T> extends Identity<T> {
 
     private DateTime createdAt;
 
+    private String createdIp;
+
     private String modifiedBy;
 
     private DateTime modifiedAt;
 
-    private String ip;
+    private String modifiedIp;
+
+
 
 }
