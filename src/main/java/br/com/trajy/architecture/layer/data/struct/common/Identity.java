@@ -1,9 +1,8 @@
 package br.com.trajy.architecture.layer.data.struct.common;
 
-import static javax.persistence.GenerationType.IDENTITY;
-
 import lombok.Getter;
 import lombok.Setter;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.MappedSuperclass;
@@ -14,7 +13,8 @@ import javax.persistence.MappedSuperclass;
 public abstract class Identity<T> {
 
     @Id
-    @GeneratedValue(strategy = IDENTITY)
+    @GeneratedValue(generator = "uuid2")
+    @Column(columnDefinition = "BINARY(16)", updatable = false, nullable = false)
     private T id;
 
 }

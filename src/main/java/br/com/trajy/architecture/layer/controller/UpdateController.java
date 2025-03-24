@@ -1,5 +1,7 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUserId;
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUsername;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.PATH_URL_ID_REQUIRED;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -9,9 +11,8 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.noContent;
 
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
-import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,11 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
     default ResponseEntity<Void> update(@Valid @RequestBody RESOURCE resource, @PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("PUT | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         this.setId(id, resource);
+        this.setUpdateAuditData(resource);
         this.beforeUpdate(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembly()
-                .toEntity((AuditableResource<Object>) checkNotNull(resource, getMessage((PATH_URL_ID_REQUIRED))));
-        this.setUpdateAuditData(entity);
+        Identity<Object> entity = getConfig().getAssembly()
+                .toEntity(AuditableResource.class.cast(checkNotNull(resource, getMessage((PATH_URL_ID_REQUIRED)))));
+
         this.getConfig().getService().update(entity);
         this.afterUpdate(resource, request);
         log.info("PUT | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -50,8 +52,8 @@ public interface UpdateController<ID_TYPE, RESOURCE extends AuditableResource<ID
         resource.setId(id);
     }
 
-    private <ID_TYPE> void setUpdateAuditData(AuditableEntity<ID_TYPE> entity) {
-        entity.setModifiedBy("");
+    private void setUpdateAuditData(RESOURCE entity) {
+        entity.setModifiedBy(getAuthenticatedUsername());
         entity.setModifiedAt(now());
     }
 

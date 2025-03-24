@@ -2,11 +2,11 @@ package br.com.trajy.architecture.layer.service;
 
 import static br.com.trajy.architecture.layer.service.utils.ServiceUtils.formatNotFoundEntityErrorMessage;
 
-import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface FindByIdService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>> {
+public interface FindByIdService<ID_TYPE, ENTITY extends Identity<ID_TYPE>> {
 
     <REPOSITORY extends JpaRepository<ENTITY, ID_TYPE>> REPOSITORY getRepository();
 

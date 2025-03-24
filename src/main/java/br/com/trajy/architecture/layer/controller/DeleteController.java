@@ -1,9 +1,11 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUserId;
 import static org.slf4j.LoggerFactory.getLogger;
 import static org.springframework.http.ResponseEntity.noContent;
 
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import org.slf4j.Logger;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -23,7 +25,7 @@ public interface DeleteController<ID_TYPE> {
     default ResponseEntity<Void> delete(@PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("DELETE | Iniciado | Controller: {}", this.getClass().getSimpleName());
         this.beforeDelete(id, request);
-        AuditableEntity<Object> entity = getConfig().getService().findById(id);
+        Identity<Object> entity = getConfig().getService().findById(id);
         this.getConfig().getService().delete(entity);
         this.afterDelete(id, request);
         log.info("DELETE | Finalizado | Controller: {}", this.getClass().getSimpleName());

@@ -4,12 +4,13 @@ import static br.com.trajy.architecture.layer.service.utils.ServiceUtils.formatS
 import static com.google.common.base.Preconditions.checkState;
 import static java.util.Objects.isNull;
 
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.service.utils.ServiceUtils;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 
-public interface SaveService<ID_TYPE, ENTITY extends AuditableEntity<ID_TYPE>> {
+public interface SaveService<ID_TYPE, ENTITY extends Identity<ID_TYPE>> {
 
     <REPOSITORY extends JpaRepository<ENTITY, ID_TYPE>> REPOSITORY getRepository();
 

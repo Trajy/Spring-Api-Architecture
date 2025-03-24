@@ -2,6 +2,7 @@ package br.com.trajy.architecture.layer.service.utils;
 
 
 import static br.com.trajy.architecture.config.ApplicationContextStatic.getBean;
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUserId;
 import static com.google.common.base.Preconditions.checkArgument;
 import static com.google.common.base.Preconditions.checkState;
 import static java.lang.String.format;

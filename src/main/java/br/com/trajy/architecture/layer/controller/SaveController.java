@@ -1,5 +1,6 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUsername;
 import static java.lang.String.valueOf;
 import static java.net.URI.create;
 import static org.apache.commons.lang3.StringUtils.appendIfMissing;
@@ -9,7 +10,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.created;
 
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
-import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
@@ -31,7 +32,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
         log.info("POST | Iniciado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
         this.setCreateAuditData(resource, request);
         this.beforeSave(resource, request);
-        AuditableEntity<Object> entity = getConfig().getAssembly().toEntity(AuditableResource.class.cast(resource));
+        Identity<Object> entity = getConfig().getAssembly().toEntity(AuditableResource.class.cast(resource));
         this.getConfig().getService().save(entity);
         this.afterSave(resource, request);
         log.info("POST | Finalizado | Controller: {}", this.getClass().getSimpleName());
@@ -43,7 +44,7 @@ public interface SaveController<ID_TYPE, RESOURCE extends AuditableResource<ID_T
     default void afterSave(RESOURCE resource, HttpServletRequest request) { }
 
     private void setCreateAuditData(RESOURCE resource, HttpServletRequest request) {
-        resource.setCreatedBy(null);
+        resource.setCreatedBy(getAuthenticatedUsername());
         resource.setCreatedAt(now());
         resource.setIp(request.getRemoteAddr());
     }

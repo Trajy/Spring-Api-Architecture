@@ -1,5 +1,6 @@
 package br.com.trajy.architecture.layer.controller;
 
+import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUserId;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.PATH_URL_ID_REQUIRED;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -8,6 +9,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.http.ResponseEntity.ok;
 
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
+import br.com.trajy.architecture.layer.data.struct.common.Identity;
 import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
@@ -27,7 +29,7 @@ public interface FindByIdController<ID_TYPE, RESOURCE extends AuditableResource<
     default ResponseEntity<RESOURCE> find(@PathVariable ID_TYPE id, HttpServletRequest request) {
         log.info("GET | Iniciado | Controller: {}", this.getClass().getSimpleName());
         this.beforeFind(id, request);
-        AuditableEntity<Object> entity = getConfig().getService().findById(checkNotNull(id, getMessage(PATH_URL_ID_REQUIRED)));
+        Identity<Object> entity = getConfig().getService().findById(checkNotNull(id, getMessage(PATH_URL_ID_REQUIRED)));
         RESOURCE resource = (RESOURCE) getConfig().getAssembly().toResource(entity);
         this.afterFind(resource, request);
         log.info("GET | Finalizado | Controller: {} | Entity: {}", this.getClass().getSimpleName(), resource);
