@@ -6,6 +6,7 @@ import static com.google.common.collect.Iterables.getFirst;
 import static java.lang.String.valueOf;
 import static java.util.stream.Collectors.toList;
 import static org.springframework.http.HttpStatus.NOT_FOUND;
+import static org.springframework.http.HttpStatus.UNAUTHORIZED;
 import static org.springframework.http.HttpStatus.UNPROCESSABLE_ENTITY;
 import static org.springframework.http.ResponseEntity.status;
 import static org.springframework.http.ResponseEntity.unprocessableEntity;
@@ -18,8 +19,19 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.ConstraintViolationException;
+import java.sql.SQLIntegrityConstraintViolationException;
 
 public interface JpaExceptionHandler {
+
+    @ExceptionHandler(SQLIntegrityConstraintViolationException.class)
+    default ResponseEntity<ErrorMessage<String>> handleSQLIntegrityConstraintViolationException(SQLIntegrityConstraintViolationException exception, HttpServletRequest request) {
+        return status(UNPROCESSABLE_ENTITY).body(ErrorMessage.<String>builder()
+                .status(valueOf(UNPROCESSABLE_ENTITY.value()))
+                .type(request.getRequestURI())
+                .detail(exception.getMessage())
+                .build()
+        );
+    }
 
     @ExceptionHandler(EntityNotFoundException.class)
     default ResponseEntity<ErrorMessage<String>> handleEntityNotFound(EntityNotFoundException exception, HttpServletRequest request) {
