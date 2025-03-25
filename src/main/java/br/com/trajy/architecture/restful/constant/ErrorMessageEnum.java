@@ -11,7 +11,8 @@ public enum ErrorMessageEnum {
     PATH_URL_ID_REQUIRED("Id required in path url"),
     REQUEST_BODY_REQUERED("Request body required"),
     RESOURCE_VIOLATION_CONSTRAINT("Please verify Resource constraint violations"),
-    ENTITY_CONSTRAINT_VIOLATION("Please verify Entity constraint violations");
+    ENTITY_CONSTRAINT_VIOLATION("Please verify Entity constraint violations"),
+    BAD_CREDENTIALS("Usuário inexistente ou senha inválida.");
 
     private String message;
 

@@ -25,7 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 @ControllerAdvice
 public class RestGlobalExecptionHandler extends ResponseEntityExceptionHandler implements GeneralException,
-        JpaExceptionHandler {
+        JpaExceptionHandler, SecurityExceptionHandler {
 
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException exception,
