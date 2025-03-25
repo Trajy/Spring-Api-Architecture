@@ -1,6 +1,5 @@
 package br.com.trajy.architecture.layer.controller;
 
-import static br.com.trajy.architecture.layer.controller.util.SecurityUtils.getAuthenticatedUserId;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.PATH_URL_ID_REQUIRED;
 import static br.com.trajy.architecture.restful.constant.ErrorMessageEnum.getMessage;
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -10,7 +9,6 @@ import static org.springframework.http.ResponseEntity.ok;
 
 import br.com.trajy.architecture.layer.controller.config.ControllerConfigAbstract;
 import br.com.trajy.architecture.layer.data.struct.common.Identity;
-import br.com.trajy.architecture.layer.data.struct.model.AuditableEntity;
 import br.com.trajy.architecture.layer.data.struct.resource.AuditableResource;
 import org.slf4j.Logger;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
